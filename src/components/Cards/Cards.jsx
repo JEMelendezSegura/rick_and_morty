@@ -1,13 +1,13 @@
-import React from "react";
-import Card from "./Card";
+
+import Card from "../Card/Card";
+import style from "./Cards.module.css";
 
 export default function Cards(props) {
    return (
-   <div>
-         <ul>
+   <div className ={style.divFondo}>
+         <ul className = {style.unorderedList}>
          {props.characters.map((pj) => (
             <Card
-            key={pj.id}
             id={pj.id}
             name={pj.name}
             status={pj.status}
@@ -15,7 +15,7 @@ export default function Cards(props) {
             gender={pj.gender}
             origin={pj.origin.name}
             image={pj.image}
-            onClose={() => window.alert('Emulamos que se cierra la card')}/>
+            onClose={props.onClose}/>
          ))}
          </ul>
    </div>

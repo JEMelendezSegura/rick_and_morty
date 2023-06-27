@@ -1,0 +1,29 @@
+
+.divFondo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #c5c5c5a2;
+    /* background-image: url("./photo/rym.jpg"); */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./photo/rym.jpg");
+    background-size: contain;
+    background-position: center;
+  }
+
+  .unorderedList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 25px;
+    padding-right: 25px;
+    list-style-type: none;
+  }
+  
+  .unorderedList img {
+    width: 70%;
+    object-fit: cover;
+    margin: 15px;
+  }
