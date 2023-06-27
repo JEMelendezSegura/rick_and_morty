@@ -4,6 +4,9 @@ import { Routes, Route } from "react-router-dom";
 import { useState } from 'react';
 import Cards from './components/Cards/Cards.jsx';
 import Nav from './components/Nav/Nav';
+import About from './components/about/About';
+import Detail from './components/Detail/Detail';
+import Error404 from './components/error404/Error404';
 
 
 function App() {
@@ -47,9 +50,15 @@ function App() {
 
    return (
       <div className='App'>
-            <Nav onSearch={onSearch}/>
-            <Cards characters={characters} onClose={onClose} />
-   
+         <Nav onSearch={onSearch}/>
+         <Routes>
+            <Route path="/home" element={  <Cards characters={characters} onClose={onClose} />} />
+            <Route path="/about" element={  <About/>} />
+            <Route path="/detail/:id" element={  <Detail/>} />
+            <Route path="*" element={<Error404/>}/>
+
+
+         </Routes>
       </div>
    );
 }
