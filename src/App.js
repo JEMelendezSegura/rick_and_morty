@@ -1,18 +1,45 @@
 import './App.css';
 import axios from 'axios';
-import { Routes, Route } from "react-router-dom";
-import { useState } from 'react';
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Cards from './components/Cards/Cards.jsx';
 import Nav from './components/Nav/Nav';
 import About from './components/about/About';
 import Detail from './components/Detail/Detail';
 import Error404 from './components/error404/Error404';
+import Form from "./components/Form/Form";
 
 
 function App() {
-   
+   const { pathname } = useLocation()
+   const navigate = useNavigate()
+
    const [characters, setCharacters] = useState([]);
-      
+   const [access, setAccess] = useState(false)
+   
+   const EMAIL = 'esaums@gmail.com';
+   const PASSWORD = 'pastelito1'
+   
+   function login({ email, password }){
+      if(email === EMAIL && password === PASSWORD){
+        setAccess(true);
+        navigate('/home')
+      }
+    }
+
+    useEffect(()=>{
+      !access && navigate('/')
+    },[access])
+
+    function logOut(){
+        setAccess(false);
+        navigate('/')
+    }
+
+    
+
+
+
    const onSearch = (id) => {
       if(!id) alert('Ingresa un ID')
       if(characters.find(char => char.id === parseInt(id) )){
@@ -50,8 +77,9 @@ function App() {
 
    return (
       <div className='App'>
-         <Nav onSearch={onSearch}/>
+         <Nav onSearch={onSearch} logOut={logOut}/>
          <Routes>
+            <Route path="/" element={<Form login={login}/>}/>
             <Route path="/home" element={  <Cards characters={characters} onClose={onClose} />} />
             <Route path="/about" element={  <About/>} />
             <Route path="/detail/:id" element={  <Detail/>} />

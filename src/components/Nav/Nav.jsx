@@ -21,8 +21,15 @@ render(){
             <NavLink to="/about">
                 <button>About</button>
             </NavLink>
+
+            <NavLink to="/">
+                <button>Logout</button>
+            </NavLink>
+
             <SearchBar onSearch={this.props.onSearch}/>
             <NumeroAleatorio onSearch={this.props.onSearch}/>
+
+
         </nav>
     )}
 }
