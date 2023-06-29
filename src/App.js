@@ -77,7 +77,7 @@ function App() {
 
    return (
       <div className='App'>
-         <Nav onSearch={onSearch} logOut={logOut}/>
+        {pathname !== "/" && <Nav onSearch={onSearch} logOut={logOut}/>}
          <Routes>
             <Route path="/" element={<Form login={login}/>}/>
             <Route path="/home" element={  <Cards characters={characters} onClose={onClose} />} />
