@@ -15,7 +15,7 @@ function Detail() {
       } else {
          window.alert('No hay personajes con ese ID');
       }
-   });
+   }, []);
    return setCharDetail({});
     },[id])
   return <div>

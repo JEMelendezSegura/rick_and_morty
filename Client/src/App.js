@@ -16,6 +16,7 @@ function App() {
 
    const [characters, setCharacters] = useState([]);
    const [access, setAccess] = useState(false)
+   console.log(characters)
    
    const EMAIL = 'esaums@gmail.com';
    const PASSWORD = 'pastelito1'
@@ -38,11 +39,11 @@ function App() {
 
     
 
-
+    // characters.find((char) => char.id === parseInt(id) )
 
    const onSearch = (id) => {
       if(!id) alert('Ingresa un ID')
-      if(characters.find(char => char.id === parseInt(id) )){
+      if(characters.find(pj => pj.id === id)){
         alert(`Ya existe el personaje con el id ${id}`)
         return;
       }
