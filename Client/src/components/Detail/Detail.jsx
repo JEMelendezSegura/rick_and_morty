@@ -7,6 +7,7 @@ function Detail() {
     const [ charDetail, setCharDetail ] = useState({})
 
     useEffect(()=>{
+      console.log("puido infor");
         fetch(`http://localhost:3001/rickandmorty/character/${id}`)
         .then(response => response.json())
         .then((data) => {

@@ -7,10 +7,7 @@ export const addFav = (personaje) => {
     }
 }
 
-export const removeFav = (id) => {
-    return {
+export const removeFav = (id) => ({
         type: REMOVE_FAV,
-        payload: id,
-    }
-    
-}
+        payload: id,    
+})
