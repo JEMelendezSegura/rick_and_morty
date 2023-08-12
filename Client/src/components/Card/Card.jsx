@@ -1,21 +1,39 @@
-import { Link } from "react-router-dom";
 import style from "./Card.module.css";
-import {connect} from 'react-redux';
+import { Link } from "react-router-dom";
 import { addFav, removeFav } from "../../redux/actions";
-import { useState } from "react";
+import {connect} from 'react-redux';
+import { useState, useEffect } from "react";
 
-function Card({id, name, status, species, gender, origin, image, onClose, addFav, removeFav}) {
+function Card({id, name, status, species, gender, origin, image, onClose, addFav, removeFav, allCharacters}) {
    const [isFav, setIsFav] = useState(false);
 
-   const handleFavorite = () =>{
-      if(isFav){
-         setIsFav(false)
-         removeFav(id)
+   const handleFavorite = () => {
+      let character = {
+        id,
+        name,
+        status,
+        species,
+        gender,
+        origin,
+        image,
+      };
+  
+      if (isFav) {
+        setIsFav(false);
+        removeFav(id);
       } else {
-         setIsFav(true)
-         addFav({id, name, status, species, gender, origin, image})
+        setIsFav(true);
+        addFav(character);
       }
-   }
+    };
+
+    useEffect(() => {
+      allCharacters?.forEach((fav) => {
+        if (fav.id === id) {
+          setIsFav(true);
+        }
+      });
+    }, [allCharacters]);
 
 
 
@@ -26,13 +44,15 @@ function Card({id, name, status, species, gender, origin, image, onClose, addFav
                Close Card
             </span>
          </button>
-         {
-            isFav ? 
-            <button onClick={handleFavorite}>❤️</button>
-          : 
-            <button onClick={handleFavorite}>🤍</button>
-         
-}
+         {isFav ? (
+          <button onClick={handleFavorite}>
+            ❤️
+          </button>
+        ) : (
+          <button onClick={handleFavorite}>
+            🤍
+          </button>
+        )}
             <h2 className ={style.text}>{id}</h2>
          <Link to={`/detail/${id}`}>
             <h2 className ={style.text}>{name}</h2>
@@ -46,16 +66,22 @@ function Card({id, name, status, species, gender, origin, image, onClose, addFav
    );
 }
 
-export function mapDispatchToProps(dispatch){
+export const mapDispatchToProps = (dispatch) => {
    return {
-      addFav: function(character){
-         dispatch(addFav(character))
-      },
-      removeFav: function(id){
-         dispatch(removeFav(id))
-      }
-   }
-}
-
-export default connect(null, mapDispatchToProps)(Card);
-
+     addFav: (character) => {
+       dispatch(addFav(character));
+     },
+ 
+     removeFav: (id) => {
+       dispatch(removeFav(id));
+     },
+   };
+ };
+ 
+ export const mapStateToProps = (state) => {
+   return {
+     allCharacters: state.allCharacters,
+   };
+ };
+ 
+ export default connect(mapStateToProps, mapDispatchToProps)(Card);
