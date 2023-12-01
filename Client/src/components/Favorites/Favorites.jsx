@@ -1,18 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Card from '../Card/Card';
-import styled from 'styled-components';
 import { filterCards, orderCards } from '../../redux/actions';
 import { useState } from 'react';
-
-export const FavoriteStyle = styled.div`
-  display: grid;
-  grid-template-columns: 20% 20% 20% 20%;
-  justify-content: space-evenly;
-  padding: 5px;
-  width: 100%;
-  margin: auto;
-  height: 110vh;
-`;
 
 const Favorites = () => {
   const [aux, setAux] = useState(false);
@@ -42,7 +31,6 @@ const Favorites = () => {
           <option value='unknown'>Unknown</option>
         </select>
       </div>
-      <FavoriteStyle>
         {myFavorites?.map((fav) => (
           <Card
             id={fav.id}
@@ -55,7 +43,6 @@ const Favorites = () => {
             image={fav.image}
           />
         ))}
-      </FavoriteStyle>
     </div>
   );
 };

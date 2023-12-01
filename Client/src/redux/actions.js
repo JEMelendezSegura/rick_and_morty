@@ -3,7 +3,7 @@ import axios from 'axios';
 const URL = 'http://localhost:3001/rickandmorty/fav';
 
 export const addFav = (character) => {
-  return async (dispatch) => {
+  return async function (dispatch){
     try {
       const { data } = await axios.post(`${URL}`, character);
 
